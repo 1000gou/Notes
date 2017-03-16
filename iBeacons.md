@@ -23,7 +23,7 @@ UUID:
 major_number:   
 minor_number:  
 RSSI_cali[dB]:受信したときに、電波の強さから距離算出のためにキャリブレーションが必要になります。  
-計算式:  
+計算式:c  
 d[m] = 10 ^ ((TxPower - RSSI) / 20)
 
 ### Androidに受信用のアプリをインストールする

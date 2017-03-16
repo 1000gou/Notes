@@ -1,53 +1,32 @@
 # Ubuntu 14.04 LTS + Python + Juliusで音声認識
 [Raspberry Piで音声認識](http://qiita.com/t_oginogin/items/f0ba9d2eb622c05558f4)や[\[Raspberry Pi\]USBマイクと音声認識ソフトJuliusを使って音声認識を試す\(3\)　~ フルカラーLEDを音声で操作 ~](http://blog.livedoor.jp/sce_info3-craft/archives/9248622.html)を参考にして作業を進めました。
 
-### USBヘッドセット関連の設定
-※使用したヘッドセット：Logicool製ですが、型番は不明です。
-#### USBヘッドセット関連ライブラリのインストール
+#### 必要なソフトをインストール
 $ sudo apt-get update  
 $ sudo apt-get upgrade  
-$ sudo apt-get install alsa-utils sox libsox-fmt-all  
+$ sudo apt-get install alsa-utils sox libsox-fmt-all
+$ sudo apt-get install pavucontrol  
 
-#### USB機器として認識されているか確認する  
-$lsusb  
-私の環境では問題なく認識されていました。
+#### マイク（プラグインと内臓）のCard No と Device Noを調べる
+$ arecord -l  
+※私の環境ではヘッドセットはカード2, デバイス0でした
 
-#### USBヘッドセットの優先順位の確認
-$cat /proc/asound/modules  
- 0 snd_hda_intel  
- 1 snd_hda_intel  
- 2 snd_usb_audio  
+#### alsamixerでマイク音量（プラグインと内臓）を設定する
+※なぜかUSBヘッドセットをささないとalsamixerが起動できませんでした。
+$ alsamixer
+F6(サウンドカード選択)→HDA Intel PCH
+Auto-Muto : Disable
+その他をすべて１００にしてESCで終了
 
-#### USBヘッドセットの優先順位の変更
-$sudo nano /etc/modprobe.d/alsa-base.conf  
-
-\# Keep snd-usb-audio from beeing loaded as first soundcard     
-options snd-usb-audio index=-2  
-
-の行を以下に書き換える
-
-\# Keep snd-usb-audio from beeing loaded as first soundcard  
-options snd-usb-audio index=0
-
-#### 再起動してUSBヘッドセットの優先順位の確認
-$sudo reboot  
-$cat /proc/asound/modules  
-0 snd_usb_audio  
-1 snd_hda_intel  
-2 snd_hda_intel  
-
-#### Card No と Device Noを調べる
-$ arecord -l
-※私の環境ではヘッドセットはカード0, デバイス0でした
-
-#### マイクボリュームをセットする
-$ amixer sset Mic 20 -c 0  
-20がボリューム（0-40なので50%）,0がカード番号です。
+#### alsamixerでマイク音量（プラグインor内臓）を１００に設定する
+$ pavucontrol  
+入力タブの音量設定を１００にする
 
 #### 録音してみる
-$ arecord -D plughw:0,0 -d 10 -f cd test.wav  
-0,0 はカード番号の0とデバイス番号の0  
-終了はctl+c
+$ arecord -D plughw:2,0 -r 16000 -f S16_LE test.wav  
+※2,0 はカード番号の2とデバイス番号の0  
+※16000はJulius用に16kHz  
+※終了はctl+c  
 
 #### 再生してみる
 $ aplay test.wav
@@ -82,9 +61,11 @@ $ln -s ~/julius-4.3.1/dictation-kit-v4.3.1-linux/ julius_dic
 
 ##### Juliusの実行(waveファイル)
 $ julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -input rawfile  
+※16kHzで録音されてる必要あり。
+
 
 ##### Juliusの実行(マイクから)
-$ ALSADEV="plughw:0,0" julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -nostrip
+$ ALSADEV="plughw:2,0" julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -nostrip
 
 ##### オリジナルディクテーションファイルの作成
 command.yomi
@@ -121,10 +102,63 @@ $ nano ~/julius_dic/command.jconf
 -charconv EUC-JP UTF-8
 ```
 ##### オリジナルディクテーションファイルの動作確認
-$ ALSADEV="plughw:0,0" julius -C ~/julius_dic/command.jconf -nostrip  
+###### マイクから
+$ ALSADEV="plughw:2,0" julius -C ~/julius_dic/command.jconf -nostrip  
+
+###### WAVファイルから  
+$ julius -C ~/julius_dic/command.jconf -input rawfile
+
+# USBヘッドセット関連の設定(うまくいかなかったので参考)
+※使用したヘッドセット：Logicool製ですが、型番は不明です。
+※いろいろ試したけどUbuntu 14.04LTS + USBヘッドセット　+ Julius rev.4.3.1の組み合わせでは、1度は起動できるけど、2度目の起動前はUSBを抜き差ししないといけないという不具合ではまり、解決できませんでした。[こちらの方](http://engetu21.hatenablog.com/entry/2014/11/16/155927)も同じ現象が起きているので、そういうものだと思って諦めました。
+
+#### USB機器として認識されているか確認する  
+$lsusb  
+私の環境では問題なく認識されていました。
+
+#### USBヘッドセットの優先順位の確認
+$cat /proc/asound/modules  
+ 0 snd_hda_intel  
+ 1 snd_hda_intel  
+ 2 snd_usb_audio  
+
+#### USBヘッドセットの優先順位の変更
+$sudo nano /etc/modprobe.d/alsa-base.conf  
+
+\# Keep snd-usb-audio from beeing loaded as first soundcard     
+options snd-usb-audio index=-2  
+
+の行を以下に書き換える
+
+\# Keep snd-usb-audio from beeing loaded as first soundcard  
+options snd-usb-audio index=0
+
+#### 再起動してUSBヘッドセットの優先順位の確認
+$sudo reboot  
+$cat /proc/asound/modules  
+0 snd_usb_audio  
+1 snd_hda_intel  
+2 snd_hda_intel
+
+#### USBヘッドセットのCard No と Device Noを調べる
+$ arecord -l
+※私の環境ではヘッドセットはカード2, デバイス0でした
+
+##### Juliusの実行(USBヘッドセットから)
+$ ALSADEV="plughw:0,0" julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -nostrip
 
 うまく起動できない時は、USBを抜いて    
 $ fuser /dev/snd/*  
 USBをさして  
 $ fuser /dev/snd/*  
-pcmc***が消えるまで上記コマンドを実行してから、再実行すると確実にALSADEVの起動がうまくいく
+pcmc***が消えるまで上記コマンドを実行してから、再実行するとうまく起動できる
+
+#### USBヘッドセットのトラブルシュートで使ったコマンド
+※Ubuntuの別の音関連の不具合対策にもつかえると思う
+
+$ cat /proc/asound/cards
+$ cat /proc/asound/modules  
+$ arecord -l
+$ sudo apt-get install pavucontrol
+$ pavucontrol
+$ alsamixer

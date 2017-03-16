@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot name="my_robo">
+  <link name="base_link">
+ 
+    <visual>
+      <geometry>
+        <box size="0.400 0.200 0.100"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.400 0.200 0.100"/>
+      </geometry>
+    </collision>
+
+
+  </link>
+</robot>

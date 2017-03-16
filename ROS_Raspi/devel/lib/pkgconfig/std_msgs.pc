@@ -1,0 +1,8 @@
+prefix=/home/pi/github/Study_for_Autonomous_Sumobot_Jr/ROS_Raspi/devel
+
+Name: std_msgs
+Description: Description of std_msgs
+Version: 0.5.11
+Cflags: -I/home/pi/github/Study_for_Autonomous_Sumobot_Jr/ROS_Raspi/devel/include -I/home/pi/github/Study_for_Autonomous_Sumobot_Jr/ROS_Raspi/src/std_msgs/include
+Libs: -L/home/pi/github/Study_for_Autonomous_Sumobot_Jr/ROS_Raspi/devel/lib 
+Requires: message_runtime

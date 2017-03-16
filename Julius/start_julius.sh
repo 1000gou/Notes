@@ -1,3 +1,8 @@
-~/julius-4.3.1/julius/julius -C ~/julius_dic/command.jconf -module > /dev/null &
+#USB ヘッドセット
+#ALSADEV="plughw:0,0" ~/julius-4.3.1/julius/julius -C ~/julius_dic/command.jconf -module > /dev/null &
+
+#マイク（プラグ）
+ALSADEV="plughw:2,0" ~/julius-4.3.1/julius/julius -C ~/julius_dic/command.jconf -module > /dev/null &
+
 echo $!
 sleep 3
