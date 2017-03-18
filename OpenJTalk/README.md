@@ -1,4 +1,4 @@
-## OpenJTalkを使ってみる
+# OpenJTalkを使ってみる
 [『OpenJTalk + python で日本語テキストを発話』](http://qiita.com/kkoba84/items/b828229c374a249965a9)を参考にして、作業を行いました。
 
 ### RaspberryPiを持ってなかったので、OpenJTalkをUbuntuへインストール

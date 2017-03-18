@@ -4,7 +4,7 @@
 #### 必要なソフトをインストール
 $ sudo apt-get update  
 $ sudo apt-get upgrade  
-$ sudo apt-get install alsa-utils sox libsox-fmt-all
+$ sudo apt-get install alsa-utils sox libsox-fmt-all  
 $ sudo apt-get install pavucontrol  
 
 #### マイク（プラグインと内臓）のCard No と Device Noを調べる

@@ -43,7 +43,10 @@ def main_loop():
         while flag_main_loop:
             if "</RECOGOUT>\n." in data:
                 # RECOGOUT要素以下をXMLとしてパース
-                root = ET.fromstring('<?xml version="1.0"?>\n' + data[data.find("<RECOGOUT>"):].replace("\n.", ""))
+                print("sub_loop:B")
+                tmp = '<?xml version="1.0"?>\n' + data[data.find("<RECOGOUT>"):].replace("\n.", "")
+                print(tmp)
+                root = ET.fromstring(tmp)
                 # 言葉を判別
                 for whypo in root.findall("./SHYPO/WHYPO"):
                     print(whypo.get("WORD"))
