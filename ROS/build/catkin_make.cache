@@ -1,2 +1,2 @@
 my_robo/my_robo_description:ros_start
--DCATKIN_DEVEL_PREFIX=/home/goichi/github/Study_for_Autonomous_Sumobot_Jr/ROS/devel -DCMAKE_INSTALL_PREFIX=/home/goichi/github/Study_for_Autonomous_Sumobot_Jr/ROS/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/goichi/github/Notes/ROS/devel -DCMAKE_INSTALL_PREFIX=/home/goichi/github/Notes/ROS/install -G Unix Makefiles
