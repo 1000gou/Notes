@@ -23,8 +23,8 @@ $ pavucontrol
 入力タブの音量設定を１００にする
 
 #### 録音してみる
-$ arecord -D plughw:2,0 -r 16000 -f S16_LE test.wav  
-※2,0 はカード番号の2とデバイス番号の0  
+$ arecord -D plughw:1,0 -r 16000 -f S16_LE test.wav  
+※1,0 はカード番号の1とデバイス番号の0  
 ※16000はJulius用に16kHz  
 ※終了はctl+c  
 
@@ -65,7 +65,7 @@ $ julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -input rawfile
 
 
 ##### Juliusの実行(マイクから)
-$ ALSADEV="plughw:2,0" julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -nostrip
+$ ALSADEV="plughw:1,0" julius -C ~/julius_dic/am-gmm.jconf -C ~/julius_dic/main.jconf -nostrip
 
 ##### オリジナルディクテーションファイルの作成
 command.yomi
@@ -103,7 +103,7 @@ $ nano ~/julius_dic/command.jconf
 ```
 ##### オリジナルディクテーションファイルの動作確認
 ###### マイクから
-$ ALSADEV="plughw:2,0" julius -C ~/julius_dic/command.jconf -nostrip  
+$ ALSADEV="plughw:1,0" julius -C ~/julius_dic/command.jconf -nostrip  
 
 ###### WAVファイルから  
 $ julius -C ~/julius_dic/command.jconf -input rawfile
