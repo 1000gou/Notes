@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # iBeacon関連のメモ
 とりあえず、[こちら](http://ohwhsmm7.blog28.fc2.com/blog-entry-432.html)を読んで勉強しています。
 
@@ -28,3 +29,16 @@ d[m] = 10 ^ ((TxPower - RSSI) / 20)
 
 ### Androidに受信用のアプリをインストールする
 [iBeacon Detector](https://play.google.com/store/apps/details?id=youten.redo.ble.ibeacondetector&hl=ja)をアンドロイドにインストールして確認したところUbuntuのUUIDからiBeaconが出ていることがわかりました。
+=======
+# GAE on Windows10 メモ
+
+[google app engine python の開発環境をWindowsで整えてみる（１）](https://trueman-developer.blogspot.jp/2016/06/google-app-engine-python-windows_9.html)
+
+### Python 2.7のインストール
+1. [Pythonホームページ](https://www.python.org/)よりWindows用インストーラーをダウンロードしてインストールする。
+
+2. [Windows 用のクイックスタート](https://cloud.google.com/sdk/docs/quickstart-windows)よりGoogle Cloud SDK のインストーラをインストールする。
+
+1. SDK を初期化する
+(DOS窓)>
+>>>>>>> master
