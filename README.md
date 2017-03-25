@@ -36,10 +36,14 @@
 1. TensorFlow用の物体認識の学習済みモデルがネットに落ちているらしい。
 1. RoboWare:ROS用のIDE
 1. Cartographer：オープンソースのSLAMライブラリ by google  
+<<<<<<< Updated upstream
 1. SLAMの応用例：[Google Tango](https://get.google.com/tango/), [ルンバ980](http://trendy.nikkeibp.co.jp/article/pickup/20151002/1066839/?P=5&rt=nocnt)  
 1. LIDER(ライダー)：LADAR(レーダー)よりも短い波長の電磁波を用いることでより緻密に計測ができる物かな？[この動画](https://www.youtube.com/watch?v=gCpCGkwwy8I)を見ると結構面白そう。ただし、[値段が高い](http://www.robotshop.com/jp/ja/lidar.html)。  
 
 ### 買いたい電子工作部品
+=======
+### 買いたい物
+>>>>>>> Stashed changes
 1. DCモーター用のバイパスコンデンサ（セラコン 0.1μＦでよいのかな？）
 1. ESP-WROOM-02 開発ボード ([これ](http://goji2100.com/blog/?p=534#comment-13214)を作りたい)
 1. Wii リモコン
