@@ -1,4 +1,5 @@
 # XYZ : Da Vinci mini maker 使いかたメモ
+[※メーカーのサポート動画](http://support.xyzprinting.com/jp_ja/Help/tutorial/dvminimaker?productName=da%20Vinci%20miniMaker)
 
 1. Fusion 360でボディを選択し、STL形式で保存
 2. Da Vinci用PC立ち上げ → XYZ Ware →　開く　→ファイル選択
